@@ -16,6 +16,8 @@
  <br>
  <% @post.images.each do |image| %>
  <%= image_tag image.variant(resize: "200x200", negate: true, flip: true) %>
+ <%= link_to 'Remove', delete_image_post_path(@post, image), method: :delete,
+data: { confirm: 'Are you sure?' } %>
  <% end %>
 </p>
 <% end %>

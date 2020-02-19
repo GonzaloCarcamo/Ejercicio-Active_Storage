@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :delete_image]
 
   # GET /posts
   # GET /posts.json
@@ -60,6 +60,12 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def delete_image
+    @image = ActiveStorage::Attachment.find(params[:image_id])
+    @image.purge
+    redirect_to post_path(@post)
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
