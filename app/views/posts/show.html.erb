@@ -10,5 +10,16 @@
   <%= @post.content %>
 </p>
 
+<% if @post.images.attached? %>
+<p>
+ <strong>Images:</strong>
+ <br>
+ <% @post.images.each do |image| %>
+ <%= image_tag image.variant(resize: "200x200", negate: true, flip: true) %>
+ <% end %>
+</p>
+<% end %>
+
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
